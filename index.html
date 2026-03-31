@@ -192,6 +192,18 @@ window.addEventListener('load', () => {
 
 // Floating Hearts
 function createHeart() {
+
+    position: absolute;
+    pointer-events: none;
+    animation: floatUpSmooth 6s linear infinite;
+}
+
+@keyframes floatUpSmooth {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-110vh); }
+        }
+setInterval(createHeart,300);
+function createHeart() {
     if(document.querySelectorAll('.heart').length>30) return;
     const heart=document.createElement("div");
     heart.classList.add("heart");
@@ -202,7 +214,6 @@ function createHeart() {
     document.body.appendChild(heart);
 }
 setInterval(createHeart,300);
-
 // Stars
 function createStar(){
     const star=document.createElement("div");
