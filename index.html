@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: #b6f2a1;
+    background: #b6f2a1; /* Fav green */
     font-family: 'Dancing Script', cursive;
     display: flex;
     justify-content: center;
@@ -27,16 +27,12 @@ body {
     padding: 30px;
     text-align: center;
     box-shadow: 0 0 40px rgba(0,255,150,0.4);
-    color: white;
+    color: black;
     transition: transform 0.5s;
 }
 
-/* ===== Bouncing Letters with Rainbow Colors ===== */
-.text {
-    font-size: 35px;
-    letter-spacing: 6px;
-}
-
+/* ===== Bouncing Letters ===== */
+.text { font-size: 35px; letter-spacing: 6px; }
 .box {
     display: inline-block;
     border-radius: 8px;
@@ -46,15 +42,24 @@ body {
     box-shadow: 0 0 10px #ffffff55;
     animation: bounce 1s infinite alternate;
     cursor: default;
+    font-weight: 600;
 }
 
-.box:nth-child(odd) { color: #ff6b6b; }
-.box:nth-child(even) { color: #ffe66d; }
-
-@keyframes bounce {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-12px); }
+/* ===== Top Line Glow & Bigger ===== */
+.top-letter {
+    font-weight: 800;
+    font-size: 45px;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #ff0000,
+        0 0 15px #ff4500,
+        0 0 20px #ffd700,
+        0 0 25px #00ff00,
+        0 0 30px #1e90ff,
+        0 0 35px #8b008b;
 }
+
+@keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-12px); } }
 
 /* ===== Button ===== */
 button {
@@ -69,24 +74,17 @@ button {
     transition: 0.3s;
     font-family: 'Dancing Script', cursive;
 }
-
 button:hover { transform: scale(1.1); }
 
-#message {
-    display: none;
-    margin-top: 20px;
-    font-size: 20px;
-    animation: fadeIn 2s;
-}
-
+#message { display: none; margin-top: 20px; font-size: 20px; animation: fadeIn 2s; color:black; }
 .card.show { transform: scale(1.1); }
-
 @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 
 /* ===== Floating Hearts ===== */
 .heart {
     position: absolute;
     pointer-events: none;
+    animation: floatUp 6s linear infinite, pulse 1.5s ease-in-out infinite alternate;
 }
 
 /* ===== Stars ===== */
@@ -100,23 +98,25 @@ button:hover { transform: scale(1.1); }
     animation: twinkle 2s infinite alternate;
 }
 
-@keyframes twinkle {
-    from {opacity:0.2; transform: scale(0.5);}
-    to {opacity:1; transform: scale(1.5);}
+/* ===== Floating Hearts Animation ===== */
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-110vh) rotate(360deg); }
 }
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* ===== Stars Animation ===== */
+@keyframes twinkle { from {opacity:0.2; transform: scale(0.5);} to {opacity:1; transform: scale(1.5);} }
 
 /* ===== Mini Hearts Explosion ===== */
-.explode-heart {
-    position: absolute;
-    animation: explode 1s ease-out forwards;
-    font-size: 16px;
-}
-
-@keyframes explode {
-    0% { transform: translate(0,0) scale(1); opacity:1; }
-    100% { transform: translate(var(--x), var(--y)) scale(0.5); opacity:0; }
-}
+.explode-heart { position: absolute; animation: explode 1s ease-out forwards; font-size: 16px; }
+@keyframes explode { 0% { transform: translate(0,0) scale(1); opacity:1; } 100% { transform: translate(var(--x), var(--y)) scale(0.5); opacity:0; } }
 </style>
+
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
 
@@ -124,36 +124,45 @@ button:hover { transform: scale(1.1); }
 
 <div class="card" id="card">
 <div class="text" id="text">
-    <span class="box">H</span>
-    <span class="box">A</span>
-    <span class="box">P</span>
-    <span class="box">P</span>
-    <span class="box">I</span>
-    <span class="box">E</span>
-    <span class="box">S</span>
-    <span class="box">T</span><br>
 
-    <span class="box">B</span>
-    <span class="box">I</span>
-    <span class="box">R</span>
-    <span class="box">T</span>
-    <span class="box">H</span>
-    <span class="box">D</span>
-    <span class="box">A</span>
-    <span class="box">Y</span><br>
+    <!-- Top Line HAPPIEST BIRTHDAY BUDDY Dark Rainbow -->
+    <span class="box top-letter" style="color:#8B0000;">H</span>
+    <span class="box top-letter" style="color:#FF4500;">A</span>
+    <span class="box top-letter" style="color:#FFD700;">P</span>
+    <span class="box top-letter" style="color:#006400;">P</span>
+    <span class="box top-letter" style="color:#1E90FF;">I</span>
+    <span class="box top-letter" style="color:#4B0082;">E</span>
+    <span class="box top-letter" style="color:#8B008B;">S</span>
+    <span class="box top-letter" style="color:#FF1493;">T</span>
 
-    <span class="box">B</span>
-    <span class="box">U</span>
-    <span class="box">D</span>
-    <span class="box">D</span>
-    <span class="box">Y</span>
+    <span class="box top-letter" style="color:#8B0000;">B</span>
+    <span class="box top-letter" style="color:#FF4500;">I</span>
+    <span class="box top-letter" style="color:#FFD700;">R</span>
+    <span class="box top-letter" style="color:#006400;">T</span>
+    <span class="box top-letter" style="color:#1E90FF;">H</span>
+    <span class="box top-letter" style="color:#4B0082;">D</span>
+    <span class="box top-letter" style="color:#8B008B;">A</span>
+    <span class="box top-letter" style="color:#FF1493;">Y</span>
+
+    <span class="box top-letter" style="color:#8B0000;">B</span>
+    <span class="box top-letter" style="color:#FF4500;">U</span>
+    <span class="box top-letter" style="color:#FFD700;">D</span>
+    <span class="box top-letter" style="color:#006400;">D</span>
+    <span class="box top-letter" style="color:#1E90FF;">Y</span><br>
+
+    <!-- Bottom Line in Black -->
+    <span class="box" style="color:black;">B</span>
+    <span class="box" style="color:black;">U</span>
+    <span class="box" style="color:black;">D</span>
+    <span class="box" style="color:black;">D</span>
+    <span class="box" style="color:black;">Y</span>
 </div>
 
-<button id="tapBtn" onclick="showMessage()">Tap Please 💚</button>
 <div id="message">
     💚 Dear Buddy 💚<br><br>
-    Thank you for being always with me. You are such a great person ever I meet.💕<br>
+    Thank you for being always with me in my every gud and worst situations 💕<br>
     You mean a lot to me 😊<br>
+You are a great person ever I meet🙌🏽<br>
     Stay happy and keep smiling always 💫<br><br>
     💌 From Reshma 💌
 </div>
@@ -162,19 +171,26 @@ button:hover { transform: scale(1.1); }
 </div>
 
 <script>
-const colors = ["#00ffcc","#ff69b4","#ffe66d","#a64ca6","#ff4500"];
+const colors = ["#ff0000","#ff7f00","#ffff00","#00ff00","#0000ff","#4b0082","#8b00ff"];
 
-function showMessage() {
+// Show message + explode letters automatically after page load
+window.addEventListener('load', () => {
     document.getElementById("message").style.display = "block";
     document.getElementById("card").classList.add("show");
-    document.getElementById("tapBtn").style.display = "none";
-    const audio = document.getElementById("music");
-    audio.play();
     explodeLetters();
-    syncHeartsWithBeat(audio);
-}
 
-/* ===== Floating Rainbow Hearts ===== */
+    // Play music automatically
+    const audio = document.getElementById("music");
+    audio.muted = true; // start muted to bypass autoplay block
+    audio.play().then(() => {
+        audio.muted = false; // unmute after play starts
+        audio.volume = 0.5;
+    }).catch(err => console.log("Autoplay blocked", err));
+
+    syncHeartsWithBeat(audio);
+});
+
+// Floating Hearts
 function createHeart() {
     if(document.querySelectorAll('.heart').length>30) return;
     const heart=document.createElement("div");
@@ -184,28 +200,10 @@ function createHeart() {
     heart.style.fontSize=Math.random()*20+15+"px";
     heart.style.color=colors[Math.floor(Math.random()*colors.length)];
     document.body.appendChild(heart);
-    animateHeart(heart);
-}
-
-function animateHeart(heart){
-    let start = 0;
-    const duration = 6000;
-    const initialTop = window.innerHeight;
-    const endTop = -50;
-    function frame(){
-        start += 16;
-        const progress = start/duration;
-        const y = initialTop + (endTop-initialTop)*progress;
-        heart.style.top = y+"px";
-        heart.style.transform = `rotate(${progress*360}deg)`;
-        if(progress<1) requestAnimationFrame(frame);
-        else heart.remove();
-    }
-    frame();
 }
 setInterval(createHeart,300);
 
-/* ===== Stars ===== */
+// Stars
 function createStar(){
     const star=document.createElement("div");
     star.classList.add("star");
@@ -218,7 +216,7 @@ function createStar(){
 }
 setInterval(createStar,200);
 
-/* ===== Exploding Letters into Mini Hearts ===== */
+// Exploding Letters into Mini Hearts
 function explodeLetters(){
     const letters=document.querySelectorAll(".box");
     letters.forEach(letter=>{
@@ -239,7 +237,7 @@ function explodeLetters(){
     });
 }
 
-/* ===== Hearts Bounce With Music Beat ===== */
+// Hearts Bounce With Music Beat
 function syncHeartsWithBeat(audio){
     const context = new (window.AudioContext || window.webkitAudioContext)();
     const src = context.createMediaElementSource(audio);
@@ -256,7 +254,7 @@ function syncHeartsWithBeat(audio){
         const avg = dataArray.reduce((a,b)=>a+b)/dataArray.length;
         const scale = 0.5 + avg/256; 
         document.querySelectorAll(".heart").forEach(h=>{
-            h.style.transform += ` scale(${scale})`;
+            h.style.transform = `scale(${scale})`;
         });
     }
     animate();
