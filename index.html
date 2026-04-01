@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Happy Birthday Buddy 💚</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 
 <style>
 /* ===== Body & Background ===== */
@@ -62,9 +63,7 @@ body {
 @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-12px); } }
 
 /* ===== Message ===== */
-#message { display: none; margin-top: 20px; font-size: 20px; animation: fadeIn 2s; color:black; }
-.card.show { transform: scale(1.1); }
-@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+#message { display: block; margin-top: 20px; font-size: 20px; color:black; }
 
 /* ===== Floating Hearts ===== */
 .heart {
@@ -98,9 +97,29 @@ body {
 /* ===== Mini Hearts Explosion ===== */
 .explode-heart { position: absolute; animation: explode 1s ease-out forwards; font-size: 16px; }
 @keyframes explode { 0% { transform: translate(0,0) scale(1); opacity:1; } 100% { transform: translate(var(--x), var(--y)) scale(0.5); opacity:0; } }
-</style>
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+/* ===== Cake ===== */
+.cake {
+    font-size: 60px;
+    margin-top: 20px;
+    animation: popCake 2s ease infinite alternate;
+}
+@keyframes popCake {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2) rotate(5deg); }
+}
+
+/* ===== Handwriting Bottom BUDDY ===== */
+.handwriting {
+    font-family: 'Dancing Script', cursive;
+    color: black;
+    font-size: 35px;
+    letter-spacing: 8px;
+    margin-top: 15px;
+    display: inline-block;
+    animation: bounce 1s infinite alternate;
+}
+</style>
 </head>
 
 <body>
@@ -108,7 +127,7 @@ body {
 <div class="card" id="card">
 <div class="text" id="text">
 
-    <!-- Top Line HAPPIEST BIRTHDAY BUDDY Dark Rainbow -->
+    <!-- Top Line Rainbow -->
     <span class="box top-letter" style="color:#8B0000;">H</span>
     <span class="box top-letter" style="color:#FF4500;">A</span>
     <span class="box top-letter" style="color:#FFD700;">P</span>
@@ -133,47 +152,25 @@ body {
     <span class="box top-letter" style="color:#006400;">D</span>
     <span class="box top-letter" style="color:#1E90FF;">Y</span><br>
 
-    <!-- Bottom Line in Black -->
-    <span class="box" style="color:black;">B</span>
-    <span class="box" style="color:black;">U</span>
-    <span class="box" style="color:black;">D</span>
-    <span class="box" style="color:black;">D</span>
-    <span class="box" style="color:black;">Y</span>
 </div>
 
 <div id="message">
     💚 Dear Buddy 💚<br><br>
     Thank you for being always with me in my every gud and worst situations 💕<br>
-  You're such a great person ever I met🙌🏽<br>
+    You're such a great person ever I met🙌🏽<br>
     You mean a lot to me 😊<br>
     Stay happy and keep smiling always 💫<br><br>
     THANK YOU SOOO MUCH BRO✌🏽<br>
     💌 From Reshma 💌
 </div>
 
-<audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-</div>
+<div class="cake">🎂</div>
+<div class="handwriting">B U D D Y</div>
 
 <script>
 const colors = ["#ff0000","#ff7f00","#ffff00","#00ff00","#0000ff","#4b0082","#8b00ff"];
 
-// Show message + explode letters automatically + play music
-window.addEventListener('load', () => {
-    document.getElementById("message").style.display = "block";
-    document.getElementById("card").classList.add("show");
-    explodeLetters();
-
-    const audio = document.getElementById("music");
-    audio.muted = true; // autoplay bypass
-    audio.play().then(() => {
-        audio.muted = false;
-        audio.volume = 0.5;
-    }).catch(err => console.log("Autoplay blocked", err));
-
-    syncHeartsWithBeat(audio);
-});
-
-// Floating Hearts - smooth straight up
+// Floating Hearts
 function createHeart() {
     if(document.querySelectorAll('.heart').length>30) return;
     const heart=document.createElement("div");
@@ -199,7 +196,7 @@ function createStar(){
 }
 setInterval(createStar,200);
 
-// Exploding Letters into Mini Hearts
+// Exploding Letters
 function explodeLetters(){
     const letters=document.querySelectorAll(".box");
     letters.forEach(letter=>{
@@ -220,29 +217,27 @@ function explodeLetters(){
     });
 }
 
-// Hearts Bounce With Music Beat
-function syncHeartsWithBeat(audio){
-    const context = new (window.AudioContext || window.webkitAudioContext)();
-    const src = context.createMediaElementSource(audio);
-    const analyser = context.createAnalyser();
-    src.connect(analyser);
-    analyser.connect(context.destination);
-    analyser.fftSize = 256;
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-
-    function animate(){
-        requestAnimationFrame(animate);
-        analyser.getByteFrequencyData(dataArray);
-        const avg = dataArray.reduce((a,b)=>a+b)/dataArray.length;
-        const scale = 0.5 + avg/256; 
-        document.querySelectorAll(".heart").forEach(h=>{
-            h.style.transform = `translateY(0) scale(${scale})`;
-        });
+// Fireworks
+function fireworks(){
+    for(let i=0;i<20;i++){
+        const fire=document.createElement("div");
+        fire.innerHTML="✨";
+        fire.style.position="absolute";
+        fire.style.left=Math.random()*100+"vw";
+        fire.style.top=Math.random()*100+"vh";
+        fire.style.fontSize="20px";
+        document.body.appendChild(fire);
+        setTimeout(()=>fire.remove(),1000);
     }
-    animate();
 }
+setInterval(fireworks,5000);
+
+// Run explode letters after page load
+window.addEventListener('load', () => {
+    document.getElementById("card").classList.add("show");
+    explodeLetters();
+});
 </script>
 
 </body>
-        </html>
+</html>
