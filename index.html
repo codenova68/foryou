@@ -157,7 +157,7 @@ body {
 <div id="message">
     💚 Dear Buddy 💚<br><br>
     Thank you for being always with me in my every gud and worst situations 💕<br>
-    You're such a great person ever I met🙌🏽<br>
+    You're such a great person ever I meet🙌🏽<br>
     You mean a lot to me 😊<br>
     Stay happy and keep smiling always 💫<br><br>
     THANK YOU SOOO MUCH BRO✌🏽<br>
@@ -165,7 +165,6 @@ body {
 </div>
 
 <div class="cake">🎂</div>
-<div class="handwriting">B U D D Y</div>
 
 <script>
 const colors = ["#ff0000","#ff7f00","#ffff00","#00ff00","#0000ff","#4b0082","#8b00ff"];
@@ -182,19 +181,30 @@ function createHeart() {
     document.body.appendChild(heart);
 }
 setInterval(createHeart,300);
-
-// Stars
+// Stars - more shiny and frequent
 function createStar(){
     const star=document.createElement("div");
     star.classList.add("star");
     star.style.left=Math.random()*100+"vw";
     star.style.top=Math.random()*100+"vh";
-    star.style.width=Math.random()*3+1+"px";
-    star.style.height=star.style.width;
+    
+    // bigger + random size for shine effect
+    const size = Math.random()*3 + 1;
+    star.style.width = size+"px";
+    star.style.height = size+"px";
+    
+    // brighter opacity randomly
+    star.style.opacity = 0.5 + Math.random()*0.5;
+    
     document.body.appendChild(star);
-    setTimeout(()=>star.remove(),4000);
+    
+    // twinkle duration random for extra sparkle
+    star.style.animationDuration = (1 + Math.random()*1.5) + "s";
+    
+    setTimeout(()=>star.remove(),5000); // slightly longer lifetime
 }
-setInterval(createStar,200);
+setInterval(createStar,100); // create every 0.1 sec → more stars
+
 
 // Exploding Letters
 function explodeLetters(){
